@@ -1,5 +1,5 @@
 ---
 # DEFINING VARIABLES WHICH DO NOT HAVE TO BE CHANGED ON A REGULATE BASIS
-aws_access_key: AKIAJ22Y7SIUMHUBRXMQ
-aws_secret_key: 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
+aws_access_key: 
+aws_secret_key: 
 region: ap-south-1
