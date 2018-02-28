@@ -1,0 +1,7 @@
+---
+ - import_tasks: publicip.yml
+ - import_tasks: security-iam.yml
+ - import_tasks: ec2.yml
+# - import_tasks: ec2facts.yml
+ - import_tasks: rds.yml
+ - import_tasks: s3lambda.yml

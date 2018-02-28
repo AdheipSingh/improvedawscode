@@ -1,0 +1,38 @@
+---
+ - name: CREATE A SECURITY GROUP
+   ec2_group:
+        name: "{{ security_group_name }}"
+        description: "{{ security_group_description }}"
+        region: "{{ security_group_region }}"
+        vpc_id: "{{ vpc_id }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+        aws_access_key: "{{ aws_access_key }}"
+        rules:
+           - proto: tcp
+             from_port: 22
+             to_port: 22
+             cidr_ip: "{{ ip_to_allow_ssh }}"
+   register: final_output
+   ignore_errors: yes
+
+ - debug:
+                var:  final_output             
+
+ - debug: 
+                msg: "VPC AND SECURITY GROUP HAVE BEEN CONFIGURED AND SSH RULE HAS BEEN ALLOWED FOR THE SUBNET {{ ip_to_allow_ssh }}"
+   when: final_output.failed == false 
+
+ - name: CREATE A IAM ROLE 
+   iam:
+       iam_type: role
+       name: "{{ rolename }}"
+       state: present
+       trust_policy: 
+        Version: '2012-10-17'
+        Statement:
+        - Action: sts:AssumeRole
+          Effect: Allow
+          Principal:
+            Service: "{{ service_name }}"
+       aws_access_key: "{{ aws_access_key }}"
+       aws_secret_key: "{{ aws_secret_key }}"

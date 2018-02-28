@@ -1,0 +1,48 @@
+---
+# SECURITY GROUP VARIABLES FOR EC2 GROUP
+security_group_name: mygrp
+security_group_description: mrouprules
+security_group_region: ap-south-1
+vpc_id: vpc-cd8f33a5  
+ip_to_allow_ssh: 10.0.0.0/16
+
+# VARIABLES FOR AN EC2 INSTANCE
+instance_type: t2.micro
+image: ami-43d0982c 
+vpc_subnet_id: subnet-eaff4082 
+ec2_key_name: instance
+device_name: /dev/xvda
+volume_type: gp2
+size: 8
+
+#VARIABLES FOR RDS DEPLOYMEN
+rds_instance_name:
+rds_db_engine:
+rds_db_size:
+rds_instance_size:
+rds_db_user_name:
+rds_db_password:
+rds_instance_name:
+sg_group:
+vpc_subnet:
+zone:
+
+# ROLES FOR LAMBDA
+rolename: mlksjdasdasdasdasdf
+service_name: lambda.amazonaws.com
+
+# CREATION OF LAMBDA FUNCTION
+
+name_lambda: mayalambda
+role: arn:aws:iam::642956775490:role/lamdarole
+handler: lambda.lambda_handler
+runtime: nodejs4.3
+
+# S3 VARIABLES 
+
+s3_bucket_name:
+destobject:
+srcobject:
+s3_key:
+
+

@@ -1,0 +1,26 @@
+provider "aws" {
+        access_key = "{{ aws_access_key }}"
+        secret_key = "{{ aws_secret_key }}"
+        region = "{{ region }}"
+}
+
+resource "aws_iam_role" "{{ role_name }}" {
+  name = "{{ role_name }}"
+
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "{{ service_name }}"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+

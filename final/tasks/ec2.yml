@@ -1,0 +1,43 @@
+---
+ - name: CREATE EC2 KEYS
+   ec2_key:
+        name: "{{ ec2_key_name }}"
+        state: present
+        region: "{{ region }}"
+        aws_access_key: "{{ aws_access_key }}"
+        aws_secret_key: "{{ aws_secret_key }}"
+
+
+
+
+ - name: CREATE EC2 INSTANCE 
+   ec2:
+    key_name:  "{{ ec2_key_name }}"
+    instance_type: "{{ instance_type }}"
+    image: "{{ image }}"
+    wait: yes
+    group: "{{ security_group_name }}"
+    count: 3
+    vpc_subnet_id: "{{ vpc_subnet_id }}"
+    assign_public_ip: yes
+    wait: yes
+    wait_timeout: 300
+    region: "{{ region }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    volumes:
+      - device_name: "{{ device_name }}"
+        volume_type: "{{ volume_type }}"
+        volume_size: "{{ size }}"
+        delete_on_termination: true
+   register: facts_ec2
+   ignore_errors: yes
+
+
+
+ 
+ - debug:
+        var: facts_ec2
+
+ - debug:
+        var: NOTE THE ID ,,,,, FIRST STAGE EXECUTION IS COMPLETE

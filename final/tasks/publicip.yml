@@ -1,0 +1,6 @@
+---
+ - name: IDENTIFY IP ADDRESS FROM THE DEVELOPER MACHINES
+   debug: 
+        msg: YOUR IP ADDRESS IS "{{ ansible_default_ipv4.address }}"
+#        aws_access_key: "{{ aws_access_key }}"
+#        aws_secret_key: "{{ aws_secret_key }}" 

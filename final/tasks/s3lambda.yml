@@ -1,0 +1,37 @@
+---
+ - name: CREATE A BITBUCKET FOR UPLOADING THE DATA
+   aws_s3:
+                bucket: "{{ s3_bucket_name }}"
+                region: "{{ aws_region }}"
+                mode: create
+                aws_access_key: "{{ aws_access_key_id }}"
+                aws_secret_key: "{{ aws_secret_key_id }}"
+          register: s3_bitbucket_url
+
+ - name: DISPLAY S3 BITBUCKET URL
+   debug:
+                 var: s3_bitbucket_url
+
+
+ - name: PUT THE HELLO.JS/zip ON BITBUCKET
+   aws_s3:
+               bucket: "{{ s3_bucket_name }}"
+               object: "{{ destcobject }}"
+               src: "{{ srcobject }}"
+               mode: put
+               aws_access_key: "{{ aws_access_key_id }}"
+               aws_secret_key: "{{ aws_secret_key_id }}"
+
+ - name: CREATE A NODE JS LAMBDA FUNCTION
+   lambda:
+                name: "{{ name_lambda }}"                
+                state: present
+                s3_bucket:  "{{ s3_bucket_name }}"
+                s3_key: "{{ s3_key }}"
+                runtime: "{{ runtime }}"
+                region: "{{ aws_region }}"
+                role: "{{ role }}"
+                handler: "{{ handler }}"
+                aws_access_key: "{{ aws_access_key_id }}"
+                aws_secret_key: "{{ aws_secret_key_id }}"
+
